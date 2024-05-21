@@ -1,0 +1,20 @@
+.sequencer-step {
+  height: 15vh;
+}
+
+.sequencer-step-button {
+  all: unset;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 20px;
+}
+
+.settings-bar {
+  border: 1px solid blue;
+  border-radius: 20px;
+  margin: 5vh 25vh;
+}
+
+.settings-bar-icon {
+  font-size: 10vh;
+}
