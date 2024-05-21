@@ -1,3 +1,7 @@
+Todo:
+- save total energy per step somewhere (to avoid iterating on every step)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

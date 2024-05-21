@@ -1,5 +1,5 @@
 .sequencer-step {
-  height: 15vh;
+  height: 12vh;
 }
 
 .sequencer-step-button {
@@ -12,9 +12,5 @@
 .settings-bar {
   border: 1px solid blue;
   border-radius: 20px;
-  margin: 5vh 25vh;
-}
-
-.settings-bar-icon {
-  font-size: 10vh;
+  margin: 0 25vh;
 }
