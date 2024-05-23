@@ -1,16 +1,8 @@
-.sequencer-step {
-  height: 12vh;
+:root {
+    --dark-grey: #343434
 }
 
-.sequencer-step-button {
-  all: unset;
-  cursor: pointer;
-  background-color: grey;
-  border-radius: 20px;
-}
-
-.settings-bar {
-  border: 1px solid blue;
-  border-radius: 20px;
-  margin: 0 25vh;
+.card {
+    background-color: var(--dark-grey);
+    border-radius: 25px
 }

@@ -1,8 +1,9 @@
 // modified from: https://github.com/lillydinhle/react-piano-component/blob/master/src/demo/components/InteractivePiano.js
 import React, { useEffect } from 'react';
 import Piano from 'react-piano-component';
-import './InteractivePiano.css';
+import './EnergyPiano.css';
 import { useState } from 'react';
+import CustomTip from './CustomTip';
 
 function PianoContainer({ children }) {
     return (
@@ -15,40 +16,60 @@ function PianoContainer({ children }) {
     );
 }
 
-function AccidentalKey({ noteProbability, onMouseDown, onDoubleClick }) {
-    let grey = 68
+function AccidentalKey({ onMouseDown, onDoubleClick, noteEnergy }) {
+    let normal = {
+        r: 52,
+        g: 52,
+        b: 52
+    }
 
-    let r = grey + (255 - grey) * noteProbability;
-    let g = grey - 68 * noteProbability;
-    let b = grey - 68 * noteProbability;
+    let full = {
+        r: 160,
+        g: 18,
+        b: 18
+    }
+
+    let r = normal.r - (normal.r - full.r) * noteEnergy / 100;
+    let g = normal.g - (normal.g - full.g) * noteEnergy / 100;
+    let b = normal.b - (normal.b - full.b) * noteEnergy / 100;
 
     let backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
     return (
         <div className={'interactive-piano__accidental-key__wrapper'}>
             <button className='interactive-piano__accidental-key' onMouseDown={onMouseDown} onDoubleClick={onDoubleClick} style={{ backgroundColor: backgroundColor }}>
-                <div className='interactive-piano__text'>{noteProbability}</div>
             </button>
         </div>
     );
 }
 
-function NaturalKey({ noteProbability, onMouseDown, onDoubleClick }) {
-    let r = 255;
-    let g = Math.round(255 * (1 - noteProbability));
-    let b = Math.round(255 * (1 - noteProbability));
+function NaturalKey({ noteEnergy, onMouseDown, onDoubleClick }) {
+    let normal = {
+        r: 255,
+        g: 255,
+        b: 255
+    }
+
+    let full = {
+        r: 160,
+        g: 18,
+        b: 18
+    }
+
+    let r = normal.r - (normal.r - full.r) * noteEnergy / 100;
+    let g = normal.g - (normal.g - full.g) * noteEnergy / 100;
+    let b = normal.b - (normal.b - full.b) * noteEnergy / 100;
 
     let backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
     return (
         <button className='interactive-piano__natural-key' onMouseDown={onMouseDown} onDoubleClick={onDoubleClick} style={{ backgroundColor: backgroundColor }}>
-            <div className={'interactive-piano__text'}>{noteProbability}</div>
         </button >
     );
 }
 
 
-function PianoKey({ note, isNoteAccidental, getNoteEnergy, getNoteProbability, updateNoteEnergy }) {
+function PianoKey({ note, isNoteAccidental, getNoteEnergy, updateNoteEnergy }) {
     const [isDragging, setIsDragging] = useState(false);
     const [lastDragY, setLastDragY] = useState(0);
 
@@ -87,12 +108,15 @@ function PianoKey({ note, isNoteAccidental, getNoteEnergy, getNoteProbability, u
     }
 
     const KeyComponent = isNoteAccidental ? AccidentalKey : NaturalKey;
-    const noteProbability = getNoteProbability(note).toFixed(2);
 
-    return <KeyComponent onMouseDown={handleMouseDown} onDoubleClick={handleDoubleClick} noteProbability={noteProbability} />;
+    return (<KeyComponent
+        onMouseDown={handleMouseDown}
+        onDoubleClick={handleDoubleClick} n
+        noteEnergy={getNoteEnergy(note)}
+    />);
 }
 
-export default function InteractivePiano({ selectedStepEnergies, setSelectedStepEnergies }) {
+export default function EnergyPiano({ selectedStepEnergies, setSelectedStepEnergies }) {
     function updateNoteEnergy(note, energy) {
         let nextSelectedStepEnergies = new Map(selectedStepEnergies);
         nextSelectedStepEnergies.set(note, energy);
@@ -103,24 +127,32 @@ export default function InteractivePiano({ selectedStepEnergies, setSelectedStep
         return selectedStepEnergies.get(note) || 0;
     }
 
-    function getNoteProbability(note) {
-        let noteEnergy = getNoteEnergy(note);
-
-        let totalEnergy = 0;
-        selectedStepEnergies.forEach((energy, _) => totalEnergy += energy);
-        return totalEnergy === 0 ? 0 : noteEnergy / totalEnergy;
-    }
+    const tip = (
+        <div>
+            Drag on a note to adjust energy for the selected step. Notes with high energy have a greater probability of being played on the selected step.
+            <br />
+            <br />
+            Double click to set to max/min energy.
+        </div>
+    );
 
     return (
-        <PianoContainer>
-            <Piano startNote={'C4'} endNote={'B5'} renderPianoKey={(props) => (
-                <PianoKey
-                    {...props}
-                    getNoteEnergy={getNoteEnergy}
-                    getNoteProbability={getNoteProbability}
-                    updateNoteEnergy={updateNoteEnergy}
-                />
-            )} />
-        </PianoContainer>
+        <>
+            <div
+                className='d-flex justify-content-center align-items-center p-3'
+                data-tooltip-id='energy-piano'
+                data-tooltip-delay-show={1000} >
+                <PianoContainer>
+                    <Piano startNote={'C4'} endNote={'B5'} renderPianoKey={(props) => (
+                        <PianoKey
+                            {...props}
+                            getNoteEnergy={getNoteEnergy}
+                            updateNoteEnergy={updateNoteEnergy}
+                        />
+                    )} />
+                </PianoContainer>
+            </div>
+            <CustomTip id='energy-piano' children={tip} />
+        </>
     );
 }

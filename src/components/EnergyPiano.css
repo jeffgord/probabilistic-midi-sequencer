@@ -5,6 +5,7 @@
     box-sizing: border-box;
     position: relative;
     margin: auto;
+    border-top: 10px solid var(--gold);
 }
 
 .interactive-piano__piano-container::after {
@@ -27,7 +28,7 @@
     cursor: pointer;
     background: #444;
     width: 36px;
-    height: 120px;
+    height: 95px;
     border-radius: 0px 0px 3px 3px;
     border: 3px solid #444;
     border-top: none;
@@ -46,7 +47,7 @@
     cursor: pointer;
     background: #fafafa;
     width: 50px;
-    height: 180px;
+    height: 150px;
     margin: 0 2px;
     border-radius: 0 0 3px 3px;
     border: none;

@@ -1,0 +1,10 @@
+.sequencer-step {
+    height: 12vh;
+}
+
+.sequencer-step-button {
+    all: unset;
+    cursor: pointer;
+    background-color: grey;
+    border-radius: 20px;
+}
