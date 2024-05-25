@@ -65,18 +65,19 @@ export default function ProbabilisticMidiSequencer() {
     const sequencerRef = useRef(null);
     const energyPianoRef = useRef(null);
 
+    // Hide these off canvas by default
     const [settingsSequencerConnector, setSettingsSequencerConnector] = useState({
-        startX: 0,
-        startY: 0,
-        endX: 0,
-        endY: 0,
+        startX: -2000,
+        startY: -2000,
+        endX: -2000,
+        endY: -2000,
         arrowDirection: 'right'
     });
     const [sequencerPianoConnector, setSequencerPianoConnector] = useState({
-        startX: 0,
-        startY: 0,
-        endX: 0,
-        endY: 0,
+        startX: -2000,
+        startY: -2000,
+        endX: -2000,
+        endY: -2000,
         arrowDirection: 'left'
     });
 
