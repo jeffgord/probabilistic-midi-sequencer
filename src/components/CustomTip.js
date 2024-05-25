@@ -5,7 +5,8 @@ export default function CustomTip({ id, children }) {
     const style = {
         color: 'var(--gold)',
         backgroundColor: 'var(--dark-grey)',
-        maxWidth: '300px'
+        maxWidth: '300px',
+        fontFamily: 'monospace'
     }
 
     return (<Tooltip

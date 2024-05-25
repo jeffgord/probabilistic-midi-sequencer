@@ -38,7 +38,7 @@ export default function Sequencer({ isPlaying, selectedStep, setSelectedStep, ac
         <div
             className='text-center'
             data-tooltip-id='sequencer'
-            data-tooltip-content='Click to select a step'
+            data-tooltip-content='click on a step to select it'
             data-tooltip-delay-show={1000}
         >{grid}</div>
         <CustomTip id='sequencer' />

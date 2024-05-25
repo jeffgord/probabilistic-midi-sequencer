@@ -40,6 +40,14 @@ function BpmAdjuster({ bpm, setBpm }) {
         setBpm(120);
     }
 
+    const tipContent = (
+        <div>
+            click & drag to adjust
+            <br />
+            double click to reset
+        </div>
+    )
+
     return (
         <>
             <button
@@ -47,10 +55,9 @@ function BpmAdjuster({ bpm, setBpm }) {
                 onMouseDown={handleMouseDown}
                 onDoubleClick={handleDoubleClick}
                 data-tooltip-id='bpm-tooltip'
-                data-tooltip-content='Click & drag to adjust. Double click to reset.'
                 data-tooltip-delay-show={1000}
             >{bpm} BPM</button>
-            <CustomTip id='bpm-tooltip' place='left' />
+            <CustomTip id='bpm-tooltip' place='left' children={tipContent} />
         </>);
 }
 
@@ -72,7 +79,15 @@ export default function SettingsBar({ isPlaying, togglePlay, bpm, setBpm, clearA
         window.addEventListener('keydown', handleKeyDown);
 
         return () => { window.removeEventListener('keydown', handleKeyDown) };
-    })
+    });
+
+    const playStopTip = (
+        <div>
+            play/stop
+            <br />
+            (spacebar)
+        </div>
+    );
 
     return (
         <div className='col'>
@@ -87,7 +102,6 @@ export default function SettingsBar({ isPlaying, togglePlay, bpm, setBpm, clearA
                         onClick={togglePlay}
                         style={{ fontSize: '10vh' }}
                         data-tooltip-id='play-stop'
-                        data-tooltip-content='play/stop (spacebar)'
                         data-tooltip-delay-show={1000}
                     />
                     <i className={clearClass}
@@ -99,7 +113,7 @@ export default function SettingsBar({ isPlaying, togglePlay, bpm, setBpm, clearA
                         data-tooltip-content='clear note energies'
                         data-tooltip-delay-show={1000}
                     />
-                    <CustomTip id='play-stop' />
+                    <CustomTip id='play-stop' children={playStopTip} />
                     <CustomTip id='clear-energies' />
                 </div>
             </div>

@@ -129,10 +129,7 @@ export default function EnergyPiano({ selectedStepEnergies, setSelectedStepEnerg
 
     const tip = (
         <div>
-            Drag on a note to adjust energy for the selected step. Notes with high energy have a greater probability of being played on the selected step.
-            <br />
-            <br />
-            Double click to set to max/min energy.
+            Drag on a note to adjust energy. Double click to toggle max/min energy. Notes with high energy have a greater probability of being played on the selected step.
         </div>
     );
 

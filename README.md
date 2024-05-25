@@ -3,8 +3,6 @@ This project is live <a href="https://jeffgord.github.io/probabilistic-midi-sequ
 
 Todo:
 - change page icon + title
-- add small copyright + title somewhere
-- change tooltip font
 - make more legit readme
 
 
