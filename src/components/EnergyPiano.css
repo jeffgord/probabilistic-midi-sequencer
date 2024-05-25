@@ -6,6 +6,7 @@
     position: relative;
     margin: auto;
     border-top: 10px solid var(--gold);
+    border-radius: 10px;
 }
 
 .interactive-piano__piano-container::after {
