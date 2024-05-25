@@ -1,4 +1,4 @@
-This project is live <a href="https://github.com/jeffgord/probabilistic-midi-sequencer/tree/master">here</a>.
+This project is live <a href="https://jeffgord.github.io/probabilistic-midi-sequencer/">here</a>.
 
 
 Todo:
