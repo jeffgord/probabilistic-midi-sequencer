@@ -3,15 +3,10 @@ import { WebMidi } from 'webmidi';
 
 export default function MidiHandler({ isPlaying, bpm, activeStep, setActiveStep, energies }) {
     useEffect(() => {
-        (new Promise(resolve => {
-            alert("Note that the Probabilistic MIDI Sequencer does not make sound on its own. Please connect/open a MIDI enabled device to hear sound.\n\nAlso, the browser may prompt you to allow MIDI control. Please allow MIDI control if you wish to use the sequencer.");
-            resolve();
-        })).then(() => {
-            WebMidi
-                .enable()
-                .then(() => console.log("WebMidi enabled!"))
-                .catch(() => alert("Error enabling WebMidi! Please confirm that you are using one of the following supported browsers and try again: \n\n- Edge\n- Chrome\n- Opera\n- Firefox"));
-        });
+        WebMidi
+            .enable()
+            .then(() => console.log("WebMidi enabled!"))
+            .catch(() => alert("Error enabling WebMidi! Please confirm that you are using one of the following supported browsers and try again: \n\n- Edge\n- Chrome\n- Opera\n- Firefox"));
 
         return () => WebMidi.disable();
     }, []);
