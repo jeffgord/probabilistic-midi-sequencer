@@ -6,3 +6,13 @@
     background-color: var(--dark-grey);
     border-radius: 25px
 }
+
+.copyright-text {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    text-align: center;
+    color: var(--dark-grey);
+    font-family: monospace;
+}

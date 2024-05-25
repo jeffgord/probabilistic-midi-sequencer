@@ -121,6 +121,11 @@ export default function ProbabilisticMidiSequencer() {
                         />
                     </div>
                 </div>
+                <div className='copyright-text'>
+                    Probabilistic MIDI Sequencer
+                    <br />
+                    © 2024 Jeffrey Gordon
+                </div>
             </div>
             <MidiHandler isPlaying={isPlaying} bpm={bpm} activeStep={activeStep} setActiveStep={setActiveStep} energies={energies} />
         </>
