@@ -5,7 +5,6 @@ Todo:
 - change page icon + title
 - add small copyright + title somewhere
 - change tooltip font
-- send note off on pause
 - make more legit readme
 
 

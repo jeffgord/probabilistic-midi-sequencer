@@ -22,6 +22,7 @@ export default function MidiHandler({ isPlaying, bpm, activeStep, setActiveStep,
                 setActiveStep(prevStep => (prevStep + 1) % 16);
             }, interval);
         } else {
+            sendAllNotesOff();
             setActiveStep(0);
         }
 
