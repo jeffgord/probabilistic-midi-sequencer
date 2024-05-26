@@ -6,7 +6,7 @@ export default function MidiHandler({ isPlaying, bpm, activeStep, setActiveStep,
         WebMidi
             .enable()
             .then(() => console.log("WebMidi enabled!"))
-            .catch(() => alert("Error enabling WebMidi! Please confirm that you are using one of the following supported browsers and try again: \n\n- Edge\n- Chrome\n- Opera\n- Firefox"));
+            .catch(() => alert("Error enabling WebMidi! Please confirm that you are using one of the following supported browsers (not on mobile) and try again: \n\n- Edge\n- Chrome\n- Opera\n- Firefox"));
 
         return () => WebMidi.disable();
     }, []);

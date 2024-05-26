@@ -110,10 +110,21 @@ export default function ProbabilisticMidiSequencer() {
             <div className='d-flex align-items-center vh-100 background light-grey-background'>
                 <div className="container text-center" style={{ maxWidth: '800px' }}>
                     <div className='row card' ref={settingsBarRef}>
-                        <SettingsBar isPlaying={isPlaying} togglePlay={togglePlay} bpm={bpm} setBpm={setBpm} clearAllEnergies={clearAllEnergies} />
+                        <SettingsBar
+                            isPlaying={isPlaying}
+                            togglePlay={togglePlay}
+                            bpm={bpm}
+                            setBpm={setBpm}
+                            clearAllEnergies={clearAllEnergies}
+                        />
                     </div>
                     <div className='row card my-3' ref={sequencerRef}>
-                        <Sequencer isPlaying={isPlaying} selectedStep={selectedStep} setSelectedStep={setSelectedStep} activeStep={activeStep} />
+                        <Sequencer
+                            isPlaying={isPlaying}
+                            selectedStep={selectedStep}
+                            setSelectedStep={setSelectedStep}
+                            activeStep={activeStep}
+                        />
                     </div>
                     <div className='row card' ref={energyPianoRef}>
                         <EnergyPiano
@@ -128,7 +139,13 @@ export default function ProbabilisticMidiSequencer() {
                     © 2024 Jeffrey Gordon
                 </div>
             </div>
-            <MidiHandler isPlaying={isPlaying} bpm={bpm} activeStep={activeStep} setActiveStep={setActiveStep} energies={energies} />
+            <MidiHandler
+                isPlaying={isPlaying}
+                bpm={bpm}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                energies={energies}
+            />
         </>
     );
 }
