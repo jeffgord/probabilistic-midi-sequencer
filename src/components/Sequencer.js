@@ -9,7 +9,10 @@ function SequencerStep({ value, isActive, isSelected, onClick }) {
 
     return (
         <div className='col w-25 p-3 sequencer-step'>
-            <button className='w-100 h-100 sequencer-step-button' style={style} onClick={onClick}>
+            <button
+                className='w-100 h-100 sequencer-step-button'
+                style={style}
+                onClick={onClick}>
             </button>
         </div>
     );
@@ -26,7 +29,13 @@ export default function Sequencer({ isPlaying, selectedStep, setSelectedStep, ac
             const isSelected = value === selectedStep;
             const handleClick = () => setSelectedStep(value);
 
-            return <SequencerStep key={value} value={value} isActive={isActive} isSelected={isSelected} onClick={handleClick} />;
+            return <SequencerStep
+                key={value}
+                value={value}
+                isActive={isActive}
+                isSelected={isSelected}
+                onClick={handleClick}
+            />;
         });
 
         return (
