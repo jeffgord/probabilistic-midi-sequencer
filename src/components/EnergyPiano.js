@@ -37,7 +37,11 @@ function AccidentalKey({ onMouseDown, onDoubleClick, noteEnergy }) {
 
     return (
         <div className={'interactive-piano__accidental-key__wrapper'}>
-            <button className='interactive-piano__accidental-key' onMouseDown={onMouseDown} onDoubleClick={onDoubleClick} style={{ backgroundColor: backgroundColor }}>
+            <button
+                className='interactive-piano__accidental-key'
+                onMouseDown={onMouseDown}
+                onDoubleClick={onDoubleClick}
+                style={{ backgroundColor: backgroundColor }}>
             </button>
         </div>
     );
@@ -63,13 +67,18 @@ function NaturalKey({ noteEnergy, onMouseDown, onDoubleClick }) {
     let backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
     return (
-        <button className='interactive-piano__natural-key' onMouseDown={onMouseDown} onDoubleClick={onDoubleClick} style={{ backgroundColor: backgroundColor }}>
+        <button
+            className='interactive-piano__natural-key'
+            onMouseDown={onMouseDown}
+            onDoubleClick={onDoubleClick}
+            style={{ backgroundColor: backgroundColor }}
+        >
         </button >
     );
 }
 
 
-function PianoKey({ note, isNoteAccidental, getNoteEnergy, updateNoteEnergy }) {
+function PianoKey({ note, isNoteAccidental, noteEnergy, setNoteEnergy }) {
     const [isDragging, setIsDragging] = useState(false);
     const [lastDragY, setLastDragY] = useState(0);
 
@@ -83,8 +92,8 @@ function PianoKey({ note, isNoteAccidental, getNoteEnergy, updateNoteEnergy }) {
             if (!isDragging) return;
 
             const dragAmount = Math.round((lastDragY - event.clientY));
-            const newEnergy = Math.max(Math.min(getNoteEnergy(note) + dragAmount, 100), 0)
-            updateNoteEnergy(note, newEnergy);
+            const newEnergy = Math.max(Math.min(noteEnergy + dragAmount, 100), 0)
+            setNoteEnergy(newEnergy);
             setLastDragY(event.clientY);
         };
 
@@ -100,11 +109,11 @@ function PianoKey({ note, isNoteAccidental, getNoteEnergy, updateNoteEnergy }) {
             document.removeEventListener('mouseup', handleMouseUp);
         }
 
-    }, [isDragging, lastDragY, note, getNoteEnergy, updateNoteEnergy]);
+    }, [isDragging, lastDragY, note, noteEnergy, setNoteEnergy]);
 
     const handleDoubleClick = (event) => {
-        if (getNoteEnergy(note) > 0) updateNoteEnergy(note, 0);
-        else updateNoteEnergy(note, 100);
+        if (noteEnergy > 0) setNoteEnergy(0);
+        else setNoteEnergy(100);
     }
 
     const KeyComponent = isNoteAccidental ? AccidentalKey : NaturalKey;
@@ -112,7 +121,7 @@ function PianoKey({ note, isNoteAccidental, getNoteEnergy, updateNoteEnergy }) {
     return (<KeyComponent
         onMouseDown={handleMouseDown}
         onDoubleClick={handleDoubleClick} n
-        noteEnergy={getNoteEnergy(note)}
+        noteEnergy={noteEnergy}
     />);
 }
 
@@ -121,10 +130,6 @@ export default function EnergyPiano({ selectedStepEnergies, setSelectedStepEnerg
         let nextSelectedStepEnergies = new Map(selectedStepEnergies);
         nextSelectedStepEnergies.set(note, energy);
         setSelectedStepEnergies(nextSelectedStepEnergies);
-    }
-
-    function getNoteEnergy(note) {
-        return selectedStepEnergies.get(note) || 0;
     }
 
     const tip = (
@@ -143,8 +148,8 @@ export default function EnergyPiano({ selectedStepEnergies, setSelectedStepEnerg
                     <Piano startNote={'C4'} endNote={'B5'} renderPianoKey={(props) => (
                         <PianoKey
                             {...props}
-                            getNoteEnergy={getNoteEnergy}
-                            updateNoteEnergy={updateNoteEnergy}
+                            noteEnergy={selectedStepEnergies.get(props.note) || 0}
+                            setNoteEnergy={energy => updateNoteEnergy(props.note, energy)}
                         />
                     )} />
                 </PianoContainer>

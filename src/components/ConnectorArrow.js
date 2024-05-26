@@ -61,5 +61,5 @@ export default function ConnectorArrow({ startRef, endRef, arrowDirection }) {
             <path d={pathD} stroke='var(--dark-grey)' strokeWidth="10" fill='none' />
             <polygon points={points} fill='var(--dark-grey)' />
         </svg>
-    )
+    );
 }
